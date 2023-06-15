@@ -19,15 +19,16 @@ const copy = async () => {
         throw new Error('FS operation failed');
     }
 
-    try {
-        cp( absoluteSourcePath,
-            absoluteDestinationPath,
-            {recursive: true, force: false, errorOnExist: true},
-            () => null,
-        )
-      } catch (err) {
-        throw new Error('FS operation failed');
-      }
+
+    cp( absoluteSourcePath, absoluteDestinationPath,
+        {recursive: true, force: false, errorOnExist: true},
+        (err) => {
+            if (err) {
+                throw new Error('FS operation failed');
+            }
+        }
+    );
+
 };
 
 await copy();
