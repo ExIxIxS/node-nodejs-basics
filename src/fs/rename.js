@@ -5,7 +5,7 @@ rename.js - implement function that renames file wrongFilename.txt to properFile
     (if there's no file wrongFilename.txt or properFilename.md already exists Error with message FS operation failed must be thrown)
 */
 
-const SOURSE = './src/fs/files/wrongFilename.txt';
+const SOURCE = './src/fs/files/wrongFilename.txt';
 const TARGET = './src/fs/files/properFilename.md';
 
 const rename = async () => {
@@ -15,7 +15,7 @@ const rename = async () => {
         throw new Error('FS operation failed');
     }
 
-    fsRename(SOURSE, TARGET, renameCallback);
+    fsRename(SOURCE, TARGET, renameCallback);
 };
 
 function renameCallback(err) {

@@ -6,16 +6,16 @@ copy.js - implement function that copies folder files files with all its content
     (if files folder doesn't exists or files_copy has already been created Error with message FS operation failed must be thrown)
 */
 
-const SOURSE_PATH = './src/fs/files';
+const SOURCE_PATH = './src/fs/files';
 const TARGET_PATH = './src/fs/files_copy';
-const absoluteSourcePath = path.resolve(SOURSE_PATH);
+const absoluteSourcePath = path.resolve(SOURCE_PATH);
 const absoluteDestinationPath = path.resolve(TARGET_PATH);
 
 const copy = async () => {
-    const isSourseExists = existsSync(SOURSE_PATH);
+    const isSourceExists = existsSync(SOURCE_PATH);
     const isTargetExists = existsSync(TARGET_PATH);
 
-    if (!isSourseExists || isTargetExists) {
+    if (!isSourceExists || isTargetExists) {
         throw new Error('FS operation failed');
     }
 
