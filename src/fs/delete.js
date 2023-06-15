@@ -1,5 +1,20 @@
+import { rm } from 'node:fs';
+
+/*
+delete.js - implement function that deletes file fileToRemove.txt
+    (if there's no file fileToRemove.txt Error with message FS operation failed must be thrown)
+*/
+
+const TARGET = './src/fs/files/fileToRemove.';
+
 const remove = async () => {
-    // Write your code here 
+    rm(TARGET, callback)
 };
+
+function callback(err) {
+    if (err) {
+        throw new Error('FS operation failed');
+    };
+}
 
 await remove();
