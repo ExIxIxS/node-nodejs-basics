@@ -1,7 +1,8 @@
 import path from 'node:path';
 import { release, version } from 'node:os';
 import { createServer as createServerHttp } from 'node:http';
-import { fileURLToPath, resolve } from 'node:url';
+import { fileURLToPath } from 'node:url';
+import { readFile } from 'node:fs/promises';
 import './files/c.js';
 
 /*
@@ -12,20 +13,17 @@ cjsToEsm.cjs - rewrite it to it's equivalent in ECMAScript notation (and rename 
 const currentFileUrl = import.meta.url;
 const currentFilePath = fileURLToPath(currentFileUrl);
 const currentDirPath = path.dirname(currentFilePath);
-
 const random = Math.random();
 
-let response;
-/*
+let unknownObject;
+
 if (random > 0.5) {
-    const filePath = resolve('./files/a.json');
-    response = await fetch(filePath);
-} else {
-    const filePath = resolve('./files/b.json');
-    response = await fetch(filePath);
-}
-*/
-//const unknownObject = await response.json();
+    const jsonData = await readFile('./src/modules/files/a.json', 'utf-8');
+    unknownObject = JSON.parse(jsonData);
+  } else {
+    const jsonData = await readFile('./src/modules/files/b.json', 'utf-8');
+    unknownObject = JSON.parse(jsonData);
+  }
 
 console.log(`Release ${release()}`);
 console.log(`Version ${version()}`);
@@ -40,7 +38,7 @@ const myServer = createServerHttp((_, res) => {
 
 const PORT = 3000;
 
-//console.log(unknownObject);
+console.log(unknownObject);
 
 myServer.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
@@ -48,7 +46,7 @@ myServer.listen(PORT, () => {
 });
 
 export {
-    //unknownObject,
+    unknownObject,
     myServer,
 };
 

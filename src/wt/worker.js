@@ -6,17 +6,13 @@ worker.js - extend given function to work with data received from main thread
 */
 
 // n should be received from main thread
-
-
 const nthFibonacci = (n) => (n < 2 ? n : nthFibonacci(n - 1) + nthFibonacci(n - 2));
 
-const sendResult = (inputData) => {
-  const result = nthFibonacci(inputData);
-  const status = 'resolved';
-  parentPort.postMessage({ status, data: result });
+const sendResult = () => {
+  parentPort.on("message", (inputData) => {
+    const status = 'resolved';
+    parentPort.postMessage({ status, data: nthFibonacci(inputData) });
+  });
 };
 
-parentPort.on('message', (inputData) => {
-  sendResult(inputData);
-});
-
+sendResult();

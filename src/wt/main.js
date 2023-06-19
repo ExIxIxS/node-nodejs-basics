@@ -1,4 +1,5 @@
 import { Worker } from 'node:worker_threads';
+import { cpus } from "node:os";
 
 /*
 main.js - implement function that creates number of worker threads (equal to the number of host machine logical CPU cores) from file worker.js
@@ -12,15 +13,13 @@ main.js - implement function that creates number of worker threads (equal to the
         The results in the array must be in the same order that the workers were created
 */
 
-const LOGICAL_CPU_CORES = 4; // Replace with the actual number of logical CPU cores on the host machine
-
 const createWorker = () => {
   const worker = new Worker('./src/wt/worker.js');
   return worker;
 };
 
 const performCalculations = async () => {
-  const logicalCPUCores = LOGICAL_CPU_CORES;
+  const logicalCPUCores = cpus().length;
 
   const workers = [];
   const results = [];
