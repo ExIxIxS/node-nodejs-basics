@@ -14,8 +14,7 @@ main.js - implement function that creates number of worker threads (equal to the
 */
 
 const createWorker = () => {
-  const worker = new Worker('./src/wt/worker.js');
-  return worker;
+  return new Worker('./src/wt/worker.js');
 };
 
 const performCalculations = async () => {
